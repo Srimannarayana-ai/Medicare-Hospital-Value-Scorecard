@@ -1,0 +1,25 @@
+# CMS raw downloads are large - pull from data.cms.gov instead
+01_raw/*.csv
+
+# Excel / Office lock files
+~$*
+*.tmp
+
+# Duplicate working copies left at project root (canonical copies are in docs/)
+/00_scope.xlsx
+/01_Dictionary.xlsx
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Power BI local cache if a .pbip is saved later
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

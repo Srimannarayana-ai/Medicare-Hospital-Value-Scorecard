@@ -1,0 +1,28 @@
+Medicare Hospital Value Scorecard - Scope
+
+Question
+Which hospitals deliver better patient experience and quality relative to
+Medicare spending, and where should a payer / health system focus first?
+
+Grain
+One row = one hospital (Facility ID)
+
+Geography
+State (main). Census region is available as a secondary cut.
+
+KPIs
+- Experience: HCAHPS overall star (H_HSP_RATING_STAR_RATING)
+  backup: recommend star (H_RECMND_STAR_RATING)
+- Readmission: Hybrid_HWR
+- Infection: average of available HAI_1_SIR ... HAI_6_SIR
+- Cost: MSPB-1 (national average is about 1.0)
+- Value: Quality (0-100) / MSPB
+
+Dashboard filters
+State, Hospital Ownership, Hospital Type (used as a size proxy)
+
+Measure periods (from the downloaded CMS files)
+- MSPB: 01-01-2024 to 12/31/2024
+- HCAHPS: 07/01/2024 to 06/30/2025
+- Hybrid_HWR: 07/01/2023 to 06/30/2024
+- HAI SIR: 07/01/2024 to 06/30/2025

@@ -1,0 +1,30 @@
+Value score formula
+
+I kept this simple on purpose so it is easy to explain in an interview.
+
+1) Experience
+   Exp_n = Experience_Star / 5 * 100
+   Five stars = 100.
+
+2) Readmission (Hybrid_HWR)
+   Lower rate is better, so flip it with min-max across hospitals:
+   Read_n = (max - rate) / (max - min) * 100
+
+3) Infections (average HAI SIR)
+   Same idea - lower SIR is better:
+   HAI_n = (max - sir) / (max - min) * 100
+
+4) Quality
+   Quality = average of whatever is available among Exp_n, Read_n, HAI_n
+   Missing pieces are skipped for that hospital.
+
+5) Value
+   Value_Score = Quality / MSPB
+   MSPB near 1.0 is national average spend.
+   Same quality with lower MSPB = higher value.
+
+Limits
+- Hospitals with no MSPB (or no quality pieces) do not get a value score.
+  That is common for some critical access / specialty hospitals in CMS data.
+- This is a project score for analysis / portfolio work.
+  It is not an official CMS rating.

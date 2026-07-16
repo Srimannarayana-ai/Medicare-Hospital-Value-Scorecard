@@ -1,0 +1,19 @@
+Focus list - what it means
+
+The Focus list page in Power BI keeps hospitals that are not
+"Ok / review later".
+
+Expected counts (current build):
+- 469 hospitals total on the page
+- 51  High spend / low experience
+- 418 Low value (bottom 20%)
+
+Rules
+1) High spend / low experience
+   MSPB > 1.10 and Experience_Star <= 2
+
+2) Low value (bottom 20%)
+   Value_Score is in the lowest fifth among hospitals that have a score
+
+The full hospital_value sheet still has every hospital, including
+"Ok / review later". That is normal. The Focus list page filters those out.

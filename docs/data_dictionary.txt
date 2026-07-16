@@ -1,0 +1,46 @@
+Data dictionary - fields used in the hospital table
+
+Join key
+Facility ID - CMS hospital provider number. Used to join every file.
+
+From Hospital General Information
+Facility Name, Address, City/Town, State, ZIP Code, County/Parish
+Hospital Type - also used as size proxy in the dashboard
+Hospital Ownership
+Emergency Services
+Hospital overall rating - CMS overall stars (context only)
+
+From HCAHPS
+Experience_Star - overall hospital rating stars (1-5)
+Recommend_Star - recommend hospital stars (backup / reference)
+Completed_Surveys - completed surveys when available
+
+From Unplanned Hospital Visits
+Readmission_Rate - Hybrid_HWR score (lower is better)
+Readmission_vs_National - CMS comparison text
+
+From Healthcare-Associated Infections
+HAI_SIR_Avg - mean of available HAI_1_SIR ... HAI_6_SIR (lower is better)
+HAI_SIR_Count - how many SIR measures were present for that hospital
+
+From Medicare Spending Per Beneficiary
+MSPB - MSPB-1 score. Around 1.0 = national average spend.
+        Below 1 = cheaper episode; above 1 = more expensive.
+
+Calculated fields
+Region - Census region from State
+Size_Proxy - same as Hospital Type
+Exp_n, Read_n, HAI_n - quality pieces on a 0-100 scale
+Quality - average of whichever pieces are available
+Value_Score - Quality / MSPB
+Focus_Flag
+  - High spend / low experience: MSPB > 1.10 and Experience_Star <= 2
+  - Low value (bottom 20%): Value_Score in the bottom fifth of scored hospitals
+  - Ok / review later: everyone else
+
+Source files (01_raw)
+- Hospital_General_Information.csv
+- HCAHPS-Hospital.csv
+- Unplanned_Hospital_Visits-Hospital.csv
+- Healthcare_Associated_Infections-Hospital.csv
+- Medicare_Hospital_Spending_Per_Patient-Hospital.csv
