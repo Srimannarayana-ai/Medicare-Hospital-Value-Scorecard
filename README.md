@@ -6,13 +6,13 @@ Data comes from the free CMS Provider Data Catalog (Hospitals).
 
 ## Dashboard
 
-![Power BI Scorecard page](docs/images/scorecard_dashboard.png)
+![Power BI Scorecard (Service)](docs/images/scorecard_powerbi_service.png)
 
-**Live interactive view:** [Open the dashboard](https://srimannarayana-ai.github.io/Medicare-Hospital-Value-Scorecard/live-dashboard/)
+**Live Power BI report:** [Open in Power BI Service](https://app.powerbi.com/groups/me/reports/be049ff3-332b-410b-8a9e-7998f9056401/ReportSectiond601128e1094cb9b97334c6?experience=power-bi)
 
-> Power BI Service publish needs a Power BI Pro/Premium account from Power BI Desktop (`File → Publish`). If you publish later, replace the live link above with your workspace report URL.
+Backup browser view (no Power BI login): [GitHub Pages dashboard](https://srimannarayana-ai.github.io/Medicare-Hospital-Value-Scorecard/live-dashboard/)
 
-Open the desktop file locally:
+Desktop file:
 
 `03_outputs/Medicare_Hospital_Value_Scorecard.pbix`
 
