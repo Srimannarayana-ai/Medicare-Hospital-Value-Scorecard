@@ -4,36 +4,15 @@ Hospital-level look at patient experience and quality versus Medicare spending (
 
 Data comes from the free CMS Provider Data Catalog (Hospitals).
 
-## Folder layout
+## Dashboard
 
-```
-Medicare Hospital Value Scorecard/
-├── 01_raw/                 CMS downloads (see 01_raw/README.md)
-├── 02_clean/               cleaned hospital table
-├── 03_outputs/             Power BI file + summary CSVs
-│   └── PowerBI/
-│       └── Scorecard_Data.xlsx    Excel the .pbix reads
-├── docs/                   scope, dictionary, formula notes
-│   └── images/             dashboard screenshots
-├── scripts/
-│   └── build_scorecard.py  rebuild the clean tables
-├── requirements.txt
-└── README.md
-```
+![Power BI Scorecard page](docs/images/scorecard_dashboard.png)
 
-Raw CMS CSVs are not in this repo (HCAHPS alone is ~100MB). Download steps are in `01_raw/README.md`. Cleaned tables and the Power BI file are included.
+**Live interactive view:** [Open the dashboard](https://srimannarayana-ai.github.io/Medicare-Hospital-Value-Scorecard/live-dashboard/)
 
-## Dashboard preview
+> Power BI Service publish needs a Power BI Pro/Premium account from Power BI Desktop (`File → Publish`). If you publish later, replace the live link above with your workspace report URL.
 
-Power BI Scorecard page (unfiltered view):
-
-[![Medicare Hospital Value Scorecard dashboard](docs/images/scorecard-dashboard.png)](https://raw.githubusercontent.com/Srimannarayana-ai/Medicare-Hospital-Value-Scorecard/main/docs/images/scorecard-dashboard.png)
-
-[Open full-size screenshot](https://raw.githubusercontent.com/Srimannarayana-ai/Medicare-Hospital-Value-Scorecard/main/docs/images/scorecard-dashboard.png)
-
-## Main deliverable
-
-Open this in Power BI Desktop:
+Open the desktop file locally:
 
 `03_outputs/Medicare_Hospital_Value_Scorecard.pbix`
 
@@ -47,6 +26,25 @@ Focus list breaks down as:
 - 51 high spend / low experience (MSPB > 1.10 and experience ≤ 2 stars)
 - 418 low value (bottom 20% of value scores)
 
+## Folder layout
+
+```
+Medicare Hospital Value Scorecard/
+├── 01_raw/                 CMS downloads (see 01_raw/README.md)
+├── 02_clean/               cleaned hospital table
+├── 03_outputs/             Power BI file + summary CSVs
+│   └── PowerBI/
+│       └── Scorecard_Data.xlsx
+├── docs/
+│   ├── images/scorecard_dashboard.png
+│   └── live-dashboard/     GitHub Pages interactive view
+├── scripts/
+├── requirements.txt
+└── README.md
+```
+
+Raw CMS CSVs are not in this repo (HCAHPS alone is ~100MB). Download steps are in `01_raw/README.md`. Cleaned tables and the Power BI file are included.
+
 ## How the value score works
 
 Short version: normalize experience / readmission / infections to 0–100, average them into Quality, then divide by MSPB.
@@ -55,11 +53,10 @@ Full write-up: `docs/value_formula.txt`
 
 ## Rebuild the data (optional)
 
-If you refresh the CMS CSVs in `01_raw`:
-
 ```bash
 pip install -r requirements.txt
 python scripts/build_scorecard.py
+python scripts/build_live_dashboard.py
 ```
 
 Then open the `.pbix` and hit **Refresh**.
@@ -71,6 +68,8 @@ Keep `03_outputs/PowerBI/Scorecard_Data.xlsx` where it is — that path is what 
 Send both files together:
 1. `03_outputs/Medicare_Hospital_Value_Scorecard.pbix`
 2. `03_outputs/PowerBI/Scorecard_Data.xlsx`
+
+Or share the live link above for a quick browser view.
 
 ## Notes worth knowing
 
@@ -85,7 +84,8 @@ Send both files together:
 | `docs/scope.txt` | KPIs, grain, periods |
 | `docs/data_dictionary.txt` | Field definitions |
 | `docs/value_formula.txt` | Score math |
+| `docs/images/scorecard_dashboard.png` | Scorecard screenshot |
+| `docs/live-dashboard/` | Browser dashboard (GitHub Pages) |
 | `docs/00_scope.xlsx` | Early scope sheet |
 | `docs/01_Dictionary.xlsx` | Early dictionary sheet |
-| `docs/project_notes.pdf` | Extra handwritten / PDF notes |
-| `docs/images/scorecard-dashboard.png` | Scorecard page screenshot |
+| `docs/project_notes.pdf` | Extra notes |
