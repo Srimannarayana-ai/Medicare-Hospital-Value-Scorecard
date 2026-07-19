@@ -14,6 +14,7 @@ Medicare Hospital Value Scorecard/
 │   └── PowerBI/
 │       └── Scorecard_Data.xlsx    Excel the .pbix reads
 ├── docs/                   scope, dictionary, formula notes
+│   └── images/             dashboard screenshots
 ├── scripts/
 │   └── build_scorecard.py  rebuild the clean tables
 ├── requirements.txt
@@ -21,6 +22,14 @@ Medicare Hospital Value Scorecard/
 ```
 
 Raw CMS CSVs are not in this repo (HCAHPS alone is ~100MB). Download steps are in `01_raw/README.md`. Cleaned tables and the Power BI file are included.
+
+## Dashboard preview
+
+Power BI Scorecard page (unfiltered view):
+
+[![Medicare Hospital Value Scorecard dashboard](docs/images/scorecard-dashboard.png)](https://raw.githubusercontent.com/Srimannarayana-ai/Medicare-Hospital-Value-Scorecard/main/docs/images/scorecard-dashboard.png)
+
+[Open full-size screenshot](https://raw.githubusercontent.com/Srimannarayana-ai/Medicare-Hospital-Value-Scorecard/main/docs/images/scorecard-dashboard.png)
 
 ## Main deliverable
 
@@ -79,3 +88,4 @@ Send both files together:
 | `docs/00_scope.xlsx` | Early scope sheet |
 | `docs/01_Dictionary.xlsx` | Early dictionary sheet |
 | `docs/project_notes.pdf` | Extra handwritten / PDF notes |
+| `docs/images/scorecard-dashboard.png` | Scorecard page screenshot |
