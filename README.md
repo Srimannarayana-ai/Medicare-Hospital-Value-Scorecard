@@ -53,25 +53,33 @@ Full write-up: `docs/value_formula.txt`
 
 ## Methodology & Design Decisions
 
-**The question.** I wanted a single hospital-level view a payer or health system could use to spot places that cost Medicare a lot without matching patient experience or quality. The core idea is value = quality per dollar of Medicare spend.
+**The question:**
+ I wanted a single hospital-level view a payer or health system could use to spot places that cost Medicare a lot without matching patient experience or quality. The core idea is value = quality per dollar of Medicare spend.
 
-**Why a composite score.** No single CMS file answers that. I pulled three quality signals — HCAHPS experience stars, Hybrid_HWR unplanned visits / readmission, and average HAI SIR — into one Quality score, then divided by MSPB-1. Dividing keeps it as a ratio (“quality per unit of spend”), which is easier to talk through than mixing stars, rates, and SIRs with dollars in one subtraction.
+**Why a composite score:** 
+No single CMS file answers that. I pulled three quality signals — HCAHPS experience stars, Hybrid_HWR unplanned visits / readmission, and average HAI SIR — into one Quality score, then divided by MSPB-1. Dividing keeps it as a ratio (“quality per unit of spend”), which is easier to talk through than mixing stars, rates, and SIRs with dollars in one subtraction.
 
-**Why equal weighting.** Quality is a simple average of whichever of those three pieces a hospital has. I used equal weights because I did not have a clinical reason to rank one higher, and equal weighting is easy to defend in an interview. The tradeoff is real: a weak infection SIR and a weak experience score count the same, which a clinician might disagree with. If I had stakeholder input later, I would revisit the weights.
+**Why equal weighting:** 
+Quality is a simple average of whichever of those three pieces a hospital has. I used equal weights because I did not have a clinical reason to rank one higher, and equal weighting is easy to defend in an interview. The tradeoff is real: a weak infection SIR and a weak experience score count the same, which a clinician might disagree with. If I had stakeholder input later, I would revisit the weights.
 
-**How I scaled to 0–100.** The inputs are not on the same scale. Experience is already 1–5 stars, so I used `Experience_Star / 5 * 100`. Readmission and HAI are “lower is better,” so I flipped them with a min-max across hospitals. Without that step, whichever raw measure had the wider range would dominate the average. If a hospital is missing one piece, I average the ones that are present instead of dropping the hospital from Quality.
+**How I scaled to 0–100:** 
+The inputs are not on the same scale. Experience is already 1–5 stars, so I used `Experience_Star / 5 * 100`. Readmission and HAI are “lower is better,” so I flipped them with a min-max across hospitals. Without that step, whichever raw measure had the wider range would dominate the average. If a hospital is missing one piece, I average the ones that are present instead of dropping the hospital from Quality.
 
-**Hospitals without MSPB.** A large share of the CMS roster has no MSPB (common for some critical access and specialty hospitals). I kept those hospitals in the roster and left Value_Score blank, rather than deleting them. That keeps the counts honest: about 5,432 hospitals in the file, about 2,338 with a value score.
+**Hospitals without MSPB:**
+A large share of the CMS roster has no MSPB (common for some critical access and specialty hospitals). I kept those hospitals in the roster and left Value_Score blank, rather than deleting them. That keeps the counts honest: about 5,432 hospitals in the file, about 2,338 with a value score.
 
-**Focus list thresholds.** Two review buckets:
+**Focus list thresholds:** 
+Two review buckets:
 - High spend / low experience: MSPB > 1.10 and experience ≤ 2 stars
 - Low value: bottom 20% of Value_Score among hospitals that have a score
 
 1.10 means at least 10% above the national MSPB benchmark (~1.0). Two stars sits in CMS’s own weak-experience range. I used those so the flags map to something a stakeholder already recognizes, not a random cutoff.
 
-**What this is not.** This is a screening score for portfolio / analysis work, not an official CMS measure. The source measures also cover different reporting windows and populations, so the composite is for deciding where to look first — not a final ranking of every hospital in the country.
+**What this is not:** 
+This is a screening score for portfolio / analysis work, not an official CMS measure. The source measures also cover different reporting windows and populations, so the composite is for deciding where to look first — not a final ranking of every hospital in the country.
 
-**Data vintage.** CMS Provider Data Catalog (Hospitals), files used in this project from July 2026. Measure windows in those downloads:
+**Data vintage:** 
+CMS Provider Data Catalog (Hospitals), files used in this project from July 2026. Measure windows in those downloads:
 - MSPB: 01-01-2024 to 12/31/2024
 - HCAHPS: 07/01/2024 to 06/30/2025
 - Hybrid_HWR: 07/01/2023 to 06/30/2024
@@ -112,8 +120,7 @@ Or share the live link above for a quick browser view.
 | `docs/scope.txt` | KPIs, grain, periods |
 | `docs/data_dictionary.txt` | Field definitions |
 | `docs/value_formula.txt` | Score math |
-| `docs/images/scorecard_dashboard.png` | Scorecard screenshot |
+| `docs/images/` | Dashboard screenshots |
 | `docs/live-dashboard/` | Browser dashboard (GitHub Pages) |
 | `docs/00_scope.xlsx` | Early scope sheet |
 | `docs/01_Dictionary.xlsx` | Early dictionary sheet |
-| `docs/project_notes.pdf` | Extra notes |
